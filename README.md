@@ -10,7 +10,7 @@ Step 3: `npm i` in root/api folder.
 Step 4: `cd ..` to come back to root folder.  
 Step 5: Run the MySQL server and create a database with name `nodetest`.  
 Step 6: Then in root folder run the command `npm run dev`.  
-Step 7: Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Step 7: Open [http://localhost:3000](http://localhost:3000) to view it in your browser.  
 Step 8: Enjoy, it`s working.
 
 ## Available Scripts
