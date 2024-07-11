@@ -4,13 +4,13 @@ You need `node js` and `MySQL server` installed in your system or container or c
 
 ### Steps to run
 
-Step 1: `npm i` in root folder.
-Step 2: `cd api`.
-Step 3: `npm i` in root/api folder.
-Step 4: `cd ..` to come back to root folder.
-Step 5: Run the MySQL server and create a database with name `nodetest`.
-Step 6: Then in root folder run the command `npm run dev`
-Step 7: Now check `http://localhost:3000/`.
+Step 1: `npm i` in root folder.  
+Step 2: `cd api`.  
+Step 3: `npm i` in root/api folder.  
+Step 4: `cd ..` to come back to root folder.  
+Step 5: Run the MySQL server and create a database with name `nodetest`.  
+Step 6: Then in root folder run the command `npm run dev`.  
+Step 7: Now check `http://localhost:3000/`.  
 Step 8: Enjoy, it`s working.
 
 ## Available Scripts
