@@ -8,7 +8,9 @@ const FileUpload = () => {
   const [files, setFiles] = useState([]);
 
   const onFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setFileName(selectedFile ? selectedFile.name : "");
   };
 
   const onFileNameChange = (e) => {
@@ -122,7 +124,7 @@ const FileUpload = () => {
               >
                 <div>
                   <span className="mb-2 block text-xl font-semibold text-[#07074D]">
-                    Drop files here
+                    {fileName || "Drop files here"}
                   </span>
                   <span className="mb-2 block text-base font-medium text-[#6B7280]">
                     Or
