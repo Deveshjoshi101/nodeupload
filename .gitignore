@@ -1,0 +1,9 @@
+
+# Ignore .env files in all directories
+**/.env
+
+# Optionally, you can ignore other sensitive files
+# such as credentials or configuration files
+# for example:
+# credentials/
+# secrets/

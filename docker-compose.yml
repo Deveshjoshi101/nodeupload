@@ -1,60 +1,49 @@
 version: "3.8"
 
 services:
-  db:
-    image: mysql:8
+  mysql:
+    image: mysql:8.4.1
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASS}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
-    volumes:
-      - db_data:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "5007:3306"
+      - "${MYSQL_PORT}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - app-network
 
   backend:
-    build:
-      context: ./api
+    build: ./api
     container_name: backend
-    environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      DB_NAME: ${DB_NAME}
-      PORT: 5000
-    volumes:
-      - ./api:/usr/src/app
-      - /usr/src/app/node_modules
+    env_file:
+      - ./api/.env
     ports:
-      - "5008:5000"
+      - "${BACKEND_PORT}:5000"
     depends_on:
-      - db
+      mysql:
+        condition: service_healthy
     networks:
       - app-network
 
   frontend:
-    build:
-      context: ./client
+    build: ./client
     container_name: frontend
-    environment:
-      REACT_APP_BACKEND_URL: http://backend:5000
-    volumes:
-      - ./client:/usr/src/app
-      - /usr/src/app/node_modules
+    env_file:
+      - ./client/.env
     ports:
-      - "5009:3000"
+      - "${FRONTEND_PORT}:3000"
     depends_on:
       - backend
     networks:
       - app-network
 
-volumes:
-  db_data:
-
 networks:
   app-network:
-    driver: bridge
+    name: nodeupload_app-network
