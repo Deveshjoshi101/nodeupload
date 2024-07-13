@@ -1,8 +1,13 @@
-# Use the official Node.js image as the base image
+# Dockerfile for backend
+
+# Use the official Node.js image
 FROM node:18
 
-# Set the working directory inside the container
+# Create and change to the app directory
 WORKDIR /usr/src/app
+
+# Copy the wait-for-it script
+COPY wait-for-it.sh /usr/src/app/
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -16,5 +21,5 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 5000
 
-# Command to run the app
-CMD ["npm", "start"]
+# Wait for MySQL to be ready, then start the app
+CMD ["./wait-for-it.sh", "mysql:3306", "--", "npm", "start"]

@@ -43,7 +43,7 @@ const FileUpload = () => {
       const res = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/files/list`
       );
-      setUploadedFiles(res.data);
+      setUploadedFiles(Array.isArray(res.data) ? res.data : []); // Ensure the fetched data is an array
     } catch (err) {
       setMessage("Error fetching files");
     }

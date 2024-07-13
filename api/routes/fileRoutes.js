@@ -9,8 +9,8 @@ const upload = multer({ storage: storage });
 // Route to upload multiple files
 router.post("/upload", upload.array("files", 10), async (req, res) => {
   try {
-    console.log("Files:", req.files); // Log the uploaded files
-    console.log("Body:", req.body); // Log the request body
+    console.log("Files:", req.files);
+    console.log("Body:", req.body);
 
     const files = req.files;
     const uploadedFiles = await Promise.all(
@@ -25,7 +25,7 @@ router.post("/upload", upload.array("files", 10), async (req, res) => {
       .status(201)
       .json({ message: "Files uploaded successfully", files: uploadedFiles });
   } catch (err) {
-    console.error(err); // Log the error for debugging
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
